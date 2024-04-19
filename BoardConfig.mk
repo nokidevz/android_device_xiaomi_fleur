@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-DEVICE_PATH := device/xiaomi/rosemary
+DEVICE_PATH := device/xiaomi/fleur
 
 # A/B
 AB_OTA_UPDATER := true
@@ -46,7 +46,7 @@ TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
 
 # Bootloader
 BOARD_VENDOR := xiaomi
-TARGET_BOOTLOADER_BOARD_NAME := rosemary
+TARGET_BOOTLOADER_BOARD_NAME := fleur
 TARGET_NO_BOOTLOADER := true
 
 # Boot Image
@@ -84,14 +84,14 @@ ODM_MANIFEST_SKUS += nfc
 ODM_MANIFEST_NFC_FILES := $(DEVICE_PATH)/manifest_nfc.xml
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):init_rosemary
-TARGET_RECOVERY_DEVICE_MODULES := init_rosemary
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):init_fleur
+TARGET_RECOVERY_DEVICE_MODULES := init_fleur
 
 # Kernel
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/xiaomi/mt6785
-TARGET_KERNEL_CONFIG := rosemary_defconfig
+TARGET_KERNEL_SOURCE := kernel/xiaomi/mt6781
+TARGET_KERNEL_CONFIG := fleur_defconfig
 BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_CUSTOM_DTBOIMG_MK := $(DEVICE_PATH)/dtbo/dtbo.mk
 BOARD_KERNEL_IMAGE_NAME := Image.gz
@@ -100,7 +100,7 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_HEALTH_CHARGING_CONTROL_SUPPORTS_BYPASS := false
 
 # OTA assert
-TARGET_OTA_ASSERT_DEVICE := rosemary,secret,maltose
+TARGET_OTA_ASSERT_DEVICE := fleur,fleurp,miel,mielp
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 131072                   # 2048      * 64   (pagesize)
@@ -153,20 +153,21 @@ TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # Recovery
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt6785
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.mt6781
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
 
 # Sepolicy
-include device/mediatek/sepolicy_vndr/SEPolicy.mk
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
-SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+#include device/mediatek/sepolicy_vndr/SEPolicy.mk
+#BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+#SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
+#SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 
 # SPL
-VENDOR_SECURITY_PATCH := 2022-03-01
+VENDOR_SECURITY_PATCH := 2024-04-01
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
@@ -202,4 +203,4 @@ BOARD_VNDK_VERSION := current
 WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 
 # Inherit the proprietary files
-include vendor/xiaomi/rosemary/BoardConfigVendor.mk
+include vendor/xiaomi/fleur/BoardConfigVendor.mk

@@ -1,4 +1,4 @@
-# Device tree for Redmi Note 10S
+# Device tree for POCO M4 Pro 4G
 
 ```
 #

@@ -9,20 +9,20 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit from device makefile.
-$(call inherit-product, device/xiaomi/rosemary/device.mk)
+$(call inherit-product, device/xiaomi/fleur/device.mk)
 
 # Inherit some common LineageOS stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_rosemary
-PRODUCT_DEVICE := rosemary
-PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_BRAND := Redmi
-PRODUCT_MODEL := M2101K7BNY
+PRODUCT_DEVICE := fleur
+PRODUCT_NAME := lineage_fleur
+PRODUCT_BRAND := POCO
+PRODUCT_MODEL := POCO M4 Pro 4G
+PRODUCT_MANUFACTURER := xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="rosemary-user 11 RP1A.200720.011 V12.5.16.0.RKLMIXM release-keys"
+    PRIVATE_BUILD_DESC="fleur-user 11 RP1A.200720.011 V13.0.10.0.RKEMIXM release-keys"
 
-BUILD_FINGERPRINT := Redmi/rosemary_global/rosemary:11/RP1A.200720.011/V12.5.16.0.RKLMIXM:user/release-keys
+BUILD_FINGERPRINT := Redmi/fleur/fleur:11/RP1A.200720.011/V13.0.10.0.RKEMIXM:user/release-keys

@@ -1,5 +1,5 @@
 #
-# vendor.prop for mt6785
+# vendor.prop for fleur
 #
 
 # ADB
@@ -62,7 +62,7 @@ ro.vendor.mtk_camera_app_version=3
 
 # DRM
 drm.service.enabled=true
-ro.netflix.bsp_rev=MTK6785-18758-1
+ro.netflix.bsp_rev=MTK6781-34066-1
 ro.vendor.mtk_widevine_drm_l1_support=1
 ro.vendor.mtk_sec_video_path_support=1
 
@@ -129,9 +129,9 @@ vendor.mtk.vdec.waitkeyframeforplay=9
 ro.vendor.pref_scale_enable_cfg=1
 
 # MediaTek
-ro.vendor.mediatek.version.branch=alps-mp-r0.mp1.tc8sp3-mt6785
-ro.vendor.mediatek.version.release=alps-mp-r0.mp1.tc8sp3-mt6785-V1.10_lcsh.xm.r0mp1.k69v1.64_P60
-ro.vendor.mediatek.platform=MT6785
+ro.vendor.mediatek.platform=MT6781
+ro.vendor.mediatek.version.branch=alps-mp-r0.mp8.tc8sp3-mt6781
+ro.vendor.mediatek.version.release=alps-mp-r0.mp8.tc8sp3-mt6781-V1.5.1_lcsh.xm.r0mp8.k6781v1.64_P48
 
 # NFC
 ro.vendor.mtk_nfc_addon_support=1
