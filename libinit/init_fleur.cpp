@@ -12,7 +12,7 @@
 static const variant_info_t fleur_info = {
     .brand = "POCO",
     .model = "POCO M4 Pro 4G",
-    .hwname_value = "fleur",
+    .hwc_value = "fleur",
     .sku_value = "",
     .device = "fleur",
     .nfc = true,
@@ -21,7 +21,7 @@ static const variant_info_t fleur_info = {
 static const variant_info_t miel_info = {
     .brand = "Redmi",
     .model = "Redmi Note 11S 4G",
-    .hwname_value = "miel",
+    .hwc_value = "miel",
     .sku_value = "",
     .device = "miel",
     .nfc = false,
