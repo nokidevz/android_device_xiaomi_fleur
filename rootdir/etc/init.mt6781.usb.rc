@@ -1,5 +1,6 @@
 on early-init
     write /sys/module/musb_hdrc/parameters/kernel_init_done 1
+    # write /sys/module/musb_hdrc/parameters/musb_force_on 1
 
 on post-fs
     setprop vendor.usb.vid "0x0E8D"
@@ -41,7 +42,7 @@ on post-fs
 
 on boot
     setprop sys.usb.configfs 1
-    setprop sys.usb.ffs.aio_compat 1
+    setprop sys.usb.ffs.aio_compat 0
     setprop vendor.usb.controller "musb-hdrc"
     setprop vendor.usb.acm_cnt 0
     setprop vendor.usb.acm_port0 ""
@@ -71,9 +72,6 @@ on boot
     chown system radio /dev/ttyGS3
     chmod 0660 /dev/ttyGS3
 
-    # for UAC MAX dpidle time
-    write /sys/module/xhci_hcd/parameters/dpidle_fs_max 0
-    write /sys/module/xhci_hcd/parameters/dpidle_hs_max 0
 
     # for usb otg sdcard hot plug detection
     write /sys/module/block/parameters/events_dfl_poll_msecs 1000
@@ -106,7 +104,7 @@ on property:sys.usb.config=none && property:sys.usb.configfs=1
     write /config/usb_gadget/g1/idVendor 0x2717
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
-    write /sys/class/udc/musb-hdrc/device/saving 0
+    write /sys/devices/platform/mt_usb/saving 0
 
 ### HID for KPOC ###
 on property:sys.usb.config=hid && property:sys.usb.configfs=1
@@ -135,7 +133,7 @@ on property:vendor.usb.clear=1 && property:sys.usb.configfs=1
     rm /config/usb_gadget/g1/configs/b.1/f4
     rm /config/usb_gadget/g1/configs/b.1/f5
     rmdir /config/usb_gadget/g1/functions/rndis.gs4
-    write /sys/class/udc/musb-hdrc/device/saving 0
+    write /sys/devices/platform/mt_usb/saving 0
     setprop vendor.usb.clear 2
 
 # has permission issue when read from ${sys.usb.ffs.ready}
@@ -172,22 +170,24 @@ on property:vendor.usb.charging=no
     write /sys/class/udc/musb-hdrc/device/cmode 1
 
 on property:vendor.usb.port.mode=usb
-	write /sys/class/udc/musb-hdrc/device/portmode 0
+	write /sys/devices/platform/mt_usb/portmode 0
 on property:vendor.usb.port.mode=uart
-	write /sys/class/udc/musb-hdrc/device/portmode 1
+	write /sys/devices/platform/mt_usb/portmode 1
 
 on property:vendor.em.usb.set=USB_DRIVING_CAPABILITY
-	write /sys/kernel/debug/usb20_phy/USB_DRIVING_CAPABILITY ${mediatek.em.usb.value}
+	write /sys/kernel/debug/usb20_phy/USB_DRIVING_CAPABILITY ${vendor.em.usb.value}
 on property:vendor.em.usb.set=RG_USB20_TERM_VREF_SEL
-	write /sys/kernel/debug/usb20_phy/RG_USB20_TERM_VREF_SEL ${mediatek.em.usb.value}
+	write /sys/kernel/debug/usb20_phy/RG_USB20_TERM_VREF_SEL ${vendor.em.usb.value}
 on property:vendor.em.usb.set=RG_USB20_HSTX_SRCTRL
-	write /sys/kernel/debug/usb20_phy/RG_USB20_HSTX_SRCTRL ${mediatek.em.usb.value}
+	write /sys/kernel/debug/usb20_phy/RG_USB20_HSTX_SRCTRL ${vendor.em.usb.value}
 on property:vendor.em.usb.set=RG_USB20_VRT_VREF_SEL
-	write /sys/kernel/debug/usb20_phy/RG_USB20_VRT_VREF_SEL ${mediatek.em.usb.value}
+	write /sys/kernel/debug/usb20_phy/RG_USB20_VRT_VREF_SEL ${vendor.em.usb.value}
 on property:vendor.em.usb.set=RG_USB20_INTR_EN
-	write /sys/kernel/debug/usb20_phy/RG_USB20_INTR_EN ${mediatek.em.usb.value}
+	write /sys/kernel/debug/usb20_phy/RG_USB20_INTR_EN ${vendor.em.usb.value}
 on property:vendor.em.usb.set=RG_USB20_PHY_REV6
-	write /sys/kernel/debug/usb20_phy/RG_USB20_PHY_REV6 ${mediatek.em.usb.value}
+	write /sys/kernel/debug/usb20_phy/RG_USB20_PHY_REV6 ${vendor.em.usb.value}
+on property:vendor.em.usb.set=RG_USB20_DISCTH
+	write /sys/kernel/debug/usb20_phy/RG_USB20_DISCTH ${vendor.em.usb.value}
 
 on property:vendor.em.usb.bypass.enable=0
 	write /sys/class/usb_rawbulk/gps/enable 1
@@ -226,37 +226,5 @@ on property:vendor.usb.printk=*
 
 on property:persist.vendor.usb.printk=*
 	setprop vendor.usb.printk ${persist.vendor.usb.printk}
-
-on property:vendor.usb.speed.mode=u3
-	write /sys/module/musb_hdrc/parameters/speed 1
-	write /sys/class/udc/musb-hdrc/device/cmode 0
-	write /sys/class/udc/musb-hdrc/device/cmode 1
-
-on property:vendor.usb.speed.mode=u2
-	write /sys/module/musb_hdrc/parameters/speed 0
-	write /sys/class/udc/musb-hdrc/device/cmode 0
-	write /sys/class/udc/musb-hdrc/device/cmode 1
-
-on property:persist.vendor.usb.speed.mode=u3
-	write /sys/module/musb_hdrc/parameters/speed 1
-	write /sys/class/udc/musb-hdrc/device/cmode 0
-	write /sys/class/udc/musb-hdrc/device/cmode 1
-
-on property:persist.vendor.usb.speed.mode=u2
-	write /sys/module/musb_hdrc/parameters/speed 0
-	write /sys/class/udc/musb-hdrc/device/cmode 0
-	write /sys/class/udc/musb-hdrc/device/cmode 1
-
-on property:vendor.usb.sib_enable=1
-	write /sys/class/udc/musb-hdrc/device/sib_enable 1
-
-on property:vendor.usb.sib_enable=0
-	write /sys/class/udc/musb-hdrc/device/sib_enable 0
-
-on property:persist.vendor.usb.dbg.lv=*
-	setprop vendor.usb.dbg.lv ${persist.vendor.usb.dbg.lv}
-
-on property:vendor.usb.dbg.lv=*
-	write /sys/module/musb_hdrc/parameters/debug_level ${vendor.usb.dbg.lv}
 
 ### PLATFORM VARIANT, cat $rc_file | grep write | sort | grep -vE "android0|usb20_phy" | awk '{print $2}' | uniq ###

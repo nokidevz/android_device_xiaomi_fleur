@@ -1,19 +1,21 @@
 //
-// Copyright (C) 2022 The LineageOS Project
+// Copyright (C) 2023 The LineageOS Project
 //
 // SPDX-License-Identifier: Apache-2.0
 //
 
+// Init configuration files
 prebuilt_etc {
-    name: "fstab.mt6781",
-    src: "etc/fstab.mt6781",
+    name: "init.aee.rc",
+    src: "etc/init.aee.rc",
+    sub_dir: "init/hw",
     vendor: true,
-    ramdisk_available: true,
 }
 
 prebuilt_etc {
     name: "init.ago.rc",
     src: "etc/init.ago.rc",
+    sub_dir: "init/hw",
     vendor: true,
 }
 
@@ -77,5 +79,12 @@ prebuilt_etc {
     name: "ueventd.mtk.rc",
     filename: "ueventd.rc",
     src: "etc/ueventd.mtk.rc",
+    vendor: true,
+}
+
+// fstab
+prebuilt_etc {
+    name: "fstab.mt6781",
+    src: "etc/fstab.mt6781",
     vendor: true,
 }
