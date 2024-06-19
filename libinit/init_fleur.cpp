@@ -15,6 +15,7 @@ static const variant_info_t fleur_info = {
 
     .brand = "Redmi",
     .device = "fleur",
+    .nfc = true,
     .model = "Redmi Note 11S",
     .build_fingerprint = "Redmi/fleur_eea/fleur:13/SP1A.210812.016/V816.0.1.0.TKEUXM:user/release-keys",
 };
@@ -25,6 +26,7 @@ static const variant_info_t fleurp_info = {
 
     .brand = "POCO",
     .device = "fleur_p",
+    .nfc = true,
     .model = "POCO M4 Pro",
     .build_fingerprint = "POCO/fleur_p_eea/fleur:13/SP1A.210812.016/V816.0.1.0.TKEEUXM:user/release-keys",
 };
@@ -35,6 +37,7 @@ static const variant_info_t miel_info = {
 
     .brand = "Redmi",
     .device = "miel",
+    .nfc = false,
     .model = "Redmi Note 11S",
     .build_fingerprint = "Redmi/miel_eea/miel:13/SP1A.210812.016/V816.0.1.0.TKEEUXM:user/release-keys",
 };
@@ -45,6 +48,7 @@ static const variant_info_t mielp_info = {
 
     .brand = "POCO",
     .device = "miel_p",
+    .nfc = false,
     .model = "POCO M4 Pro",
     .build_fingerprint = "POCO/miel_p_eea/miel:13/SP1A.210812.016/V816.0.1.0.TKEEUXM:user/release-keys",
 };
